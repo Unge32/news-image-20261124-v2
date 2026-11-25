@@ -18,6 +18,10 @@ import shutil
 def main():
     here = os.path.dirname(os.path.abspath(__file__))
     src = os.path.join(here, "entry.png")
+    if not os.path.isfile(src):
+        raise SystemExit(
+            "entry.png is missing next to main.py — it must be committed "
+            "to the repo, not just present at build time")
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR") or (
         "/output" if os.path.isdir("/output") else "out")
     os.makedirs(out_dir, exist_ok=True)
